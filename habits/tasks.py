@@ -17,4 +17,6 @@ def send_message(pk) -> None:
         "text": text,
         "chat_id": habit.user.tg_chat_id,
     }
-    requests.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", params=params)
+    requests.get(
+        f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", params=params
+    )

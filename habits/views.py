@@ -5,7 +5,8 @@ from rest_framework import generics
 from habits.models import Habit
 from habits.paginators import HabitPagination
 from habits.serializers import HabitSerializer, PublicHabitSerializer
-from habits.services import create_replacements, create_schedule, create_task, make_replacements
+from habits.services import (create_replacements, create_schedule, create_task,
+                             make_replacements)
 from users.permissions import IsUser
 
 
@@ -58,7 +59,9 @@ class HabitUpdateAPIView(generics.UpdateAPIView):
             habit.save()
 
             if habit.user.tg_chat_id:
-                task = get_object_or_404(PeriodicTask, name=f"Sending reminder {habit.pk}")
+                task = get_object_or_404(
+                    PeriodicTask, name=f"Sending reminder {habit.pk}"
+                )
                 schedule = create_schedule(habit.frequency)
                 if task:
                     task.enabled = False

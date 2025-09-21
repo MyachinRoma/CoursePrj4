@@ -112,7 +112,10 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.get("non_field_errors"), ["The time should be less then 2 mins (120 secs)."])
+        self.assertEqual(
+            response.get("non_field_errors"),
+            ["The time should be less then 2 mins (120 secs)."],
+        )
 
     def test_habit_create_good_habit_related_habit_error(self):
         url = reverse("habits:habit-create")
@@ -131,7 +134,10 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.get("non_field_errors"), ["Only a pleasant habit can be selected as related."])
+        self.assertEqual(
+            response.get("non_field_errors"),
+            ["Only a pleasant habit can be selected as related."],
+        )
 
     def test_habit_create_good_habit_reward_error(self):
         url = reverse("habits:habit-create")
@@ -153,7 +159,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["Related habit and reward can't be selected together. Select 1 of 2 options."],
+            [
+                "Related habit and reward can't be selected together. Select 1 of 2 options."
+            ],
         )
 
     def test_habit_create_good_habit_no_reward_error(self):
@@ -247,7 +255,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["For a habit that should be performed several times per day end time should be specified."],
+            [
+                "For a habit that should be performed several times per day end time should be specified."
+            ],
         )
 
     def test_habit_create_good_end_time_error(self):
@@ -270,7 +280,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["End time should be only selected for habits performed several times per day."],
+            [
+                "End time should be only selected for habits performed several times per day."
+            ],
         )
 
     def test_habit_create_good_end_time_and_start_time_not_in_the_same_day_error(self):
@@ -291,7 +303,10 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.get("non_field_errors"), ["Start and end time should be selected within 1 day."])
+        self.assertEqual(
+            response.get("non_field_errors"),
+            ["Start and end time should be selected within 1 day."],
+        )
 
     def test_habit_create_good_end_time_earlier_than_start_time_error(self):
         url = reverse("habits:habit-create")
@@ -311,7 +326,10 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.get("non_field_errors"), ["End time can't be earlier than or equal to start time."])
+        self.assertEqual(
+            response.get("non_field_errors"),
+            ["End time can't be earlier than or equal to start time."],
+        )
 
     def test_habit_create_no_days_of_week_error_1(self):
         url = reverse("habits:habit-create")
@@ -333,7 +351,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["For a habit that should be performed on specific days of week such days should be selected."],
+            [
+                "For a habit that should be performed on specific days of week such days should be selected."
+            ],
         )
 
     def test_habit_create_no_days_of_week_error_2(self):
@@ -355,7 +375,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["For a habit that should be performed on specific days of week such days should be selected."],
+            [
+                "For a habit that should be performed on specific days of week such days should be selected."
+            ],
         )
 
     def test_habit_create_no_days_of_week_error(self):
@@ -379,7 +401,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
             response.get("non_field_errors"),
-            ["Specific days should be selected only for habits performed on selected days."],
+            [
+                "Specific days should be selected only for habits performed on selected days."
+            ],
         )
 
     def test_habit_create_pleasant_habit(self):
@@ -506,7 +530,9 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.get("detail"), "You do not have permission to perform this action.")
+        self.assertEqual(
+            response.get("detail"), "You do not have permission to perform this action."
+        )
 
     def test_habit_retrieve_non_public_habit_error(self):
         url = reverse("habits:habit-detail", args=(self.pleasant_habit3.pk,))
@@ -514,7 +540,9 @@ class HabitTestCase(APITestCase):
         response = request.json()
 
         self.assertEqual(request.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(response.get("detail"), "You do not have permission to perform this action.")
+        self.assertEqual(
+            response.get("detail"), "You do not have permission to perform this action."
+        )
 
     def test_habit_list(self):
         url = reverse("habits:habit-list")
@@ -609,4 +637,3 @@ class HabitTestCase(APITestCase):
 
         self.assertEqual(request.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Habit.objects.all().count(), 3)
-        

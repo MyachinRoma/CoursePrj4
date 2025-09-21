@@ -14,7 +14,9 @@ class HabitSerializer(serializers.ModelSerializer):
     def to_internal_value(self, data):
         if self.instance:
             if not data.get("days_of_week"):
-                data["days_of_week"] = [day.pk for day in self.instance.days_of_week.all()]
+                data["days_of_week"] = [
+                    day.pk for day in self.instance.days_of_week.all()
+                ]
             for field in self.fields.keys():
                 if field not in data.keys():
                     data[field] = getattr(self.instance, field)
@@ -26,4 +28,3 @@ class PublicHabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = ("action", "is_pleasant", "time_needed")
-        

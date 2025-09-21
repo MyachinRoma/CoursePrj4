@@ -31,7 +31,9 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
@@ -78,7 +80,6 @@ DATABASES = {
     }
 }
 
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -121,7 +122,7 @@ CSRF_TRUSTED_ORIGINS = ("http://localhost:8000",)
 SPECTACULAR_SETTINGS = {
     "TITLE": "Habits API",
     "DESCRIPTION": "Habits API is an useful habits tracker. The logic of the app is based on the "
-    'book "Atomic Habits" (2018) by James Clear.',
+                   'book "Atomic Habits" (2018) by James Clear.',
     "VERSION": "0.0.1",
     "SERVE_INCLUDE_SCHEMA": False,
     "SWAGGER_UI_SETTINGS": {

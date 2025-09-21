@@ -29,9 +29,15 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
 
     username = models.CharField(
-        max_length=150, verbose_name="username", help_text="Enter your username", null=True, blank=True
+        max_length=150,
+        verbose_name="username",
+        help_text="Enter your username",
+        null=True,
+        blank=True,
     )
-    email = models.EmailField(unique=True, verbose_name="email", help_text="Enter your email")
+    email = models.EmailField(
+        unique=True, verbose_name="email", help_text="Enter your email"
+    )
     tg_chat_id = models.CharField(
         max_length=50,
         verbose_name="telegram chat id",
@@ -51,4 +57,3 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"
-        

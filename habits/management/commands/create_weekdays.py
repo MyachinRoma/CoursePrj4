@@ -10,4 +10,6 @@ class Command(BaseCommand):
         Week.objects.all().delete()
 
         call_command("loaddata", "weekdays_fixture.json", format="json")
-        self.stdout.write(self.style.SUCCESS("Weekdays creation finished successfully."))
+        self.stdout.write(
+            self.style.SUCCESS("Weekdays creation finished successfully.")
+        )

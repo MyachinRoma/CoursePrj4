@@ -12,7 +12,11 @@ def create_replacements(habit: Habit) -> dict[str, str | list[str]]:
     h = x = datetime.fromisoformat(habit.time).time().hour
     y = datetime.fromisoformat(habit.end_time).time().hour if habit.end_time else 0
     z = (x + y) // 2
-    d = ",".join([day.day for day in habit.days_of_week.all()]) if habit.days_of_week else "d"
+    d = (
+        ",".join([day.day for day in habit.days_of_week.all()])
+        if habit.days_of_week
+        else "d"
+    )
     return {"m": str(m), "x": str(x), "y": str(y), "z": str(z), "h": str(h), "d": d}
 
 

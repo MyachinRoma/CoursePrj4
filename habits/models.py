@@ -13,10 +13,17 @@ class Week(models.Model):
 class Habit(models.Model):
 
     user = models.ForeignKey(
-        User, verbose_name="user", on_delete=models.CASCADE, related_name="habits", null=True, blank=True
+        User,
+        verbose_name="user",
+        on_delete=models.CASCADE,
+        related_name="habits",
+        null=True,
+        blank=True,
     )
     place = models.CharField(
-        max_length=200, verbose_name="place", help_text="Enter the place where you'll perform your habit."
+        max_length=200,
+        verbose_name="place",
+        help_text="Enter the place where you'll perform your habit.",
     )
     time = models.DateTimeField(
         verbose_name="time",
@@ -25,7 +32,9 @@ class Habit(models.Model):
         null=True,
         blank=True,
     )
-    action = models.CharField(max_length=200, verbose_name="action", help_text="Enter the action to perform.")
+    action = models.CharField(
+        max_length=200, verbose_name="action", help_text="Enter the action to perform."
+    )
     is_pleasant = models.BooleanField(
         verbose_name="pleasant or not",
         help_text="Select whether a habit is pleasant or not. "
@@ -74,5 +83,6 @@ class Habit(models.Model):
         help_text="Enter time needed to perform a habit in secs. Not more than 2 mins (120 sec).",
     )
     is_public = models.BooleanField(
-        verbose_name="public or not", help_text="Select whether you want other users see your habit."
+        verbose_name="public or not",
+        help_text="Select whether you want other users see your habit.",
     )
