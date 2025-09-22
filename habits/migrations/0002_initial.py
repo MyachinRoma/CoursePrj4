@@ -32,7 +32,9 @@ class Migration(migrations.Migration):
             name="days_of_week",
             field=models.ManyToManyField(
                 blank=True,
-                help_text="Select specific days when a good habit should be performed.",
+                help_text="Select specific days"
+                          "when a good habit"
+                          "should be performed.",
                 null=True,
                 to="habits.week",
                 verbose_name="day(s) of week",

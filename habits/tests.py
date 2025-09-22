@@ -160,7 +160,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Related habit and reward can't be selected together. Select 1 of 2 options."
+                "Related habit and"
+                "reward can't be selected"
+                "together. Select 1 of 2 options."
             ],
         )
 
@@ -183,7 +185,10 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Good habit should have a reward or a related habit and should be performed regularly "
+                "Good habit should have"
+                "a reward or a related"
+                "habit and should be"
+                "performed regularly "
                 "and on specific time."
             ],
         )
@@ -207,7 +212,10 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Good habit should have a reward or a related habit and should be performed regularly "
+                "Good habit should have"
+                "a reward or a related"
+                "habit and should be"
+                "performed regularly "
                 "and on specific time."
             ],
         )
@@ -231,7 +239,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Good habit should have a reward or a related habit and should be performed regularly "
+                "Good habit should have a"
+                "reward or a related habit"
+                "and should be performed regularly "
                 "and on specific time."
             ],
         )
@@ -256,7 +266,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "For a habit that should be performed several times per day end time should be specified."
+                "For a habit that should be"
+                "performed several times per"
+                "day end time should be specified."
             ],
         )
 
@@ -281,11 +293,19 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "End time should be only selected for habits performed several times per day."
+                "End time should be"
+                "only selected for habits"
+                "performed several times per day."
             ],
         )
 
-    def test_habit_create_good_end_time_and_start_time_not_in_the_same_day_error(self):
+    def test_h_c_g_e_t_a_s_t_n_in_the_same_d_e(self):
+        """Test habit create good
+        end time and start time not
+        in the same day error."""
+        """(Тестирование привычки создает
+        хорошее время окончания и время начала,
+        не совпадающие по времени с ошибкой в один и тот же день)"""
         url = reverse("habits:habit-create")
         body = {
             "pk": 5,
@@ -352,7 +372,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "For a habit that should be performed on specific days of week such days should be selected."
+                "For a habit that should be"
+                "performed on specific days of"
+                "week such days should be selected."
             ],
         )
 
@@ -376,7 +398,9 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "For a habit that should be performed on specific days of week such days should be selected."
+                "For a habit that should be performed"
+                "on specific days of week such"
+                "days should be selected."
             ],
         )
 
@@ -402,7 +426,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Specific days should be selected only for habits performed on selected days."
+                "Specific days should be selected"
+                "only for habits performed on selected days."
             ],
         )
 
@@ -441,7 +466,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Pleasant habit is already reward, it can't have a related habit or reward "
+                "Pleasant habit is already reward,"
+                "it can't have a related habit or reward "
                 "and should not be performed regularly."
             ],
         )
@@ -464,7 +490,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Pleasant habit is already reward, it can't have a related habit or reward "
+                "Pleasant habit is already reward,"
+                "it can't have a related habit or reward "
                 "and should not be performed regularly."
             ],
         )
@@ -487,7 +514,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Pleasant habit is already reward, it can't have a related habit or reward "
+                "Pleasant habit is already reward,"
+                "it can't have a related habit or reward "
                 "and should not be performed regularly."
             ],
         )
@@ -510,7 +538,8 @@ class HabitTestCase(APITestCase):
         self.assertEqual(
             response.get("non_field_errors"),
             [
-                "Pleasant habit is already reward, it can't have a related habit or reward "
+                "Pleasant habit is already reward,"
+                "it can't have a related habit or reward "
                 "and should not be performed regularly."
             ],
         )
@@ -531,7 +560,8 @@ class HabitTestCase(APITestCase):
 
         self.assertEqual(request.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(
-            response.get("detail"), "You do not have permission to perform this action."
+            response.get("detail"),
+            "You do not have permission to perform this action."
         )
 
     def test_habit_retrieve_non_public_habit_error(self):
@@ -541,7 +571,8 @@ class HabitTestCase(APITestCase):
 
         self.assertEqual(request.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(
-            response.get("detail"), "You do not have permission to perform this action."
+            response.get("detail"),
+            "You do not have permission to perform this action."
         )
 
     def test_habit_list(self):

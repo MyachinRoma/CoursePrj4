@@ -41,7 +41,8 @@ class User(AbstractUser):
     tg_chat_id = models.CharField(
         max_length=50,
         verbose_name="telegram chat id",
-        help_text="Enter your telegram chat id (NOT your username that starts with @)",
+        help_text="Enter your telegram chat id"
+                  "(NOT your username that starts with @)",
         null=True,
         blank=True,
     )

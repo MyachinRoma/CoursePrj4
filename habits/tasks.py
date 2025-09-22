@@ -11,12 +11,15 @@ def send_message(pk) -> None:
     habit = Habit.objects.get(pk=pk)
     text = (
         f"It's time to do {habit.action} at {habit.place}! "
-        f"Don't forget to {habit.reward if habit.reward else habit.related_habit} afterwards."
+        f"Don't forget to"
+        f"{habit.reward if habit.reward else habit.related_habit}"
+        f"afterwards."
     )
     params = {
         "text": text,
         "chat_id": habit.user.tg_chat_id,
     }
     requests.get(
-        f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", params=params
+        f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
+        params=params
     )
