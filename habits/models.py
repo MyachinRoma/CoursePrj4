@@ -107,3 +107,6 @@ class Habit(models.Model):
         help_text="Select whether you want"
                   "other users see your habit.",
     )
+
+    class Meta:
+        ordering = ["id"]

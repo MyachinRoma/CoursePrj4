@@ -30,10 +30,10 @@ class HabitValidator:
         are selected in the same time."""
         if attrs.get("related_habit_id") and attrs.get("reward"):
             raise serializers.ValidationError(
-                "Related habit and reward"
-                "can't be selected together."
-                "Select 1 of 2 options."
-            )
+    "Related habit and"
+    "reward can't be selected"
+    "together. Select 1 of 2 options."
+)
 
     def validate_pleasant_habit(self, attrs):
         """Validates that a pleasant
@@ -49,11 +49,10 @@ class HabitValidator:
                 ]
         ):
             raise serializers.ValidationError(
-                "Pleasant habit is already"
-                "reward, it can't have"
-                "a related habit or reward "
-                "and should not be performed regularly."
-            )
+    "Pleasant habit is already "
+    "reward,it can't have a related habit or reward "
+    "and should not be performed regularly."
+)
         if not attrs.get("is_pleasant") and not any(
                 [
                     all([attrs.get("reward"),
@@ -69,11 +68,11 @@ class HabitValidator:
                 ]
         ):
             raise serializers.ValidationError(
-                "Good habit should have a reward"
-                "or a related habit and should"
-                "be performed regularly "
-                "and on specific time."
-            )
+    "Good habit should have a"
+    "reward or a related habit"
+    "and should be performed regularly "
+    "and on specific time."
+)
 
     def validate_end_time(self, attrs):
         """Validates that a habit that
@@ -96,11 +95,11 @@ class HabitValidator:
                 and attrs.get("end_time")
         ):
             raise serializers.ValidationError(
-                "End time should be"
-                "only selected for"
-                "habits performed several"
-                "times per day."
-            )
+    "End time should be"
+    "only selected for "
+    "habits"
+    "performed several times per day."
+)
         if (
                 attrs.get("end_time")
                 and attrs.get("time")
@@ -138,10 +137,9 @@ class HabitValidator:
                 and attrs.get("days_of_week")
         ):
             raise serializers.ValidationError(
-                "Specific days should be"
-                "selected only for habits"
-                "performed on selected days."
-            )
+    "Specific days should be selected"
+    "only for habits performed on selected days."
+)
 
     def __call__(self, attrs):
         self.validate_time_needed(attrs)
