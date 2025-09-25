@@ -26,13 +26,6 @@ jobs:
   test:
     needs: lint
     runs-on: ubuntu-latest
-    env:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_password
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
     - name: Check out code
@@ -49,20 +42,6 @@ jobs:
         pip install poetry
         poetry config virtualenvs.create false
         poetry install --no-root
-
-    - name: Install PostgreSQL
-      run: sudo apt-get install -y postgresql postgresql-contrib
-
-    - name: Set up database
-      run: |
-        sudo service postgresql start
-        sudo -u postgres psql -c "CREATE DATABASE test_db;"
-        sudo -u postgres psql -c "CREATE USER test_user WITH PASSWORD 'test_password';"
-        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO test_user;"
-
-    - name: Grant privileges to test_user
-      run: |
-        sudo -u postgres psql -c "ALTER USER test_user CREATEDB;"
 
     - name: Run tests
       run: python manage.py test
