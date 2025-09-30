@@ -6,7 +6,14 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
+load_dotenv(BASE_DIR / ".env")
+
+if (BASE_DIR / ".env.local").exists():
+    load_dotenv(BASE_DIR / ".env.local")
+
+    if os.getenv("DJANGO_SETTINGS_PROFILE") == "test":
+        if (BASE_DIR / ".env.test").exists():
+            load_dotenv(BASE_DIR / ".env.test")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
@@ -79,6 +86,10 @@ DATABASES = {
         "HOST": os.getenv("HOST"),
         "PORT": os.getenv("PORT"),
     }
+}
+
+DATABASES["default"]["TEST"] = {
+    "NAME": f'test_{os.getenv("NAME", "habits_db")}',
 }
 
 AUTH_PASSWORD_VALIDATORS = [

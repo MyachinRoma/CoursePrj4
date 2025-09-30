@@ -4,8 +4,10 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from django.views.generic import RedirectView
 from django.http import JsonResponse
 
+
 def healthz(_request):  # простой health-check
     return JsonResponse({"status": "ok"})
+
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/api/docs/",

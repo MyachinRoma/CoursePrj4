@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
             name="end_time",
             field=models.DateTimeField(
                 blank=True,
-                help_text="Enter the time when a habitshould be performed for thelast time per day. Only for good habits thatshould be performed severaltimes per day!",
+                help_text="Enter the time when a habit "
+                          "should be performed for the last "
+                          "time per day. Only for good habits "
+                          "that should be performed sever al times per day!",
                 null=True,
                 verbose_name="end time",
             ),
@@ -52,7 +55,10 @@ class Migration(migrations.Migration):
                     ("m h * * d", "selected days"),
                 ],
                 default="m h * * *",
-                help_text="Select how often a goodhabit should be performed. NOTE! A good habit should beperformed once a week at least.For good habits only!",
+                help_text="Select how often a good habit "
+                          "should be performed. NOTE! "
+                          "A good habit should be performed "
+                          "once a week at least.For good habits only!",
                 null=True,
                 verbose_name="frequency",
             ),
@@ -61,7 +67,10 @@ class Migration(migrations.Migration):
             model_name="habit",
             name="is_pleasant",
             field=models.BooleanField(
-                help_text="Select whether ahabit is pleasant or not. Only pleasant habits canserve as rewards for good habits.",
+                help_text="Select whether a habit "
+                          "is pleasant or not. "
+                          "Only pleasant habits "
+                          "can serve as rewards for good habits.",
                 verbose_name="pleasant or not",
             ),
         ),
@@ -101,7 +110,12 @@ class Migration(migrations.Migration):
             name="time",
             field=models.DateTimeField(
                 blank=True,
-                help_text="Enter the time when a habitshould be performed.In case a habit should beperformed several times per day, the end timeshould also be selected.For good habits only!",
+                help_text="Enter the time when a "
+                          "habitshould be performed."
+                          "In case a habit should beperformed "
+                          "several times per day, the end "
+                          "timeshould also be selected.For "
+                          "good habits only!",
                 null=True,
                 verbose_name="time",
             ),
