@@ -93,7 +93,6 @@ class Habit(models.Model):
         verbose_name="day(s) of week",
         help_text="Select specific days when"
                   "a good habit should be performed.",
-        null=True,
         blank=True,
     )
     time_needed = models.PositiveIntegerField(

@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: habits_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Prepare env
+        run: |
+          cp .env.sample .env
+          {
+            echo "NAME=habits_db"
+            echo "USER=postgres"
+            echo "PASSWORD=postgres"
+            echo "HOST=localhost"
+            echo "PORT=5432"
+            echo "DEBUG=false"
+            echo "SECRET_KEY=test-secret"
+            echo "ALLOWED_HOSTS=localhost,127.0.0.1"
+          } >> .env
+
+      - name: Django checks & migrations
+        run: |
+          poetry run python manage.py collectstatic --noinput || true
+          poetry run python manage.py migrate
+
+      - name: Run tests
+        run: poetry run pytest -q

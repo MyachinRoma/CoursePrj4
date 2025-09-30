@@ -1,9 +1,29 @@
-# HabitsApi
-HabitsApi — это API для отслеживания привычек, интегрированный с Telegram. Основанный на книге Джеймса Клира «Атомарные привычки», он поможет вам сделать полезные привычки частью своей жизни.
-# Installation
-1. Клонировать репозиторий:
-git clone https://github.com/MyachinRoma/CoursePrj4.git
-2. Установка зависимостей проекта:
-poetry add
-3. Создать базу данных с днями недели:
-python manage.py create_weekdays
+# Habits API (clean)
+
+Готовый к GitHub проект Django + DRF.
+
+## Быстрый старт (Poetry)
+```bash
+# 1) Установить Poetry, если нет
+pip install poetry
+
+# 2) Установить зависимости
+poetry install
+
+# 3) Переменные окружения
+cp .env.sample .env
+
+# 4) Миграции и запуск
+poetry run python manage.py migrate
+poetry run python manage.py runserver
+```
+
+## Тесты
+```bash
+poetry run pytest
+```
+
+## Docker (локально)
+```bash
+docker compose up --build
+```
