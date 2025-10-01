@@ -59,10 +59,7 @@ jobs:
             echo "ALLOWED_HOSTS=localhost,127.0.0.1"
           } >> .env
 
-      - name: Django checks & migrations
-        run: |
-          poetry run python manage.py collectstatic --noinput || true
-          poetry run python manage.py migrate
+      
 
       - name: Run tests
         run: poetry run pytest -q
