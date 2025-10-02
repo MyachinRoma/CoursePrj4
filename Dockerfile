@@ -9,6 +9,11 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+ENV SECRET_KEY='django-insecure-nb-q@q)aduh@rmwo)pky0ixc%kbhs+r9d!0fgfzz9io$!3&@ef'
+ENV CELERY_BROKER_URL='redis://localhost:6379'
+ENV CELERY_BACKEND='redis://localhost:6379'
+
 RUN mkdir -p /app/staticfiles
 EXPOSE 8000
 
