@@ -1,0 +1,163 @@
+import django.db.models.deletion
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    initial = True
+
+    dependencies = []
+
+    operations = [
+        migrations.CreateModel(
+            name="Week",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("day", models.CharField(max_length=3,
+                                         verbose_name="day of week")),
+            ],
+        ),
+        migrations.CreateModel(
+            name="Habit",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "place",
+                    models.CharField(
+                        help_text="Enter the place where"
+                                  "you'll perform your habit.",
+                        max_length=200,
+                        verbose_name="place",
+                    ),
+                ),
+                (
+                    "time",
+                    models.DateTimeField(
+                        blank=True,
+                        help_text="Enter the time when a habit"
+                                  "should be performed. In case a"
+                                  "habit should be performed several"
+                                  "times per day, the end time should also"
+                                  "be selected. For good habits only!",
+                        null=True,
+                        verbose_name="time",
+                    ),
+                ),
+                (
+                    "action",
+                    models.CharField(
+                        help_text="Enter the action to perform.",
+                        max_length=200,
+                        verbose_name="action",
+                    ),
+                ),
+                (
+                    "is_pleasant",
+                    models.BooleanField(
+                        help_text="Select whether a habit is"
+                                  "pleasant or not."
+                                  "Only pleasant habits can"
+                                  "serve as rewards for good habits.",
+                        verbose_name="pleasant or not",
+                    ),
+                ),
+                (
+                    "frequency",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("m x-y * * *", "every hour"),
+                            ("m x-y/2 * * *", "every 2 hours"),
+                            ("m x-y/3 * * *", "every 3 hours"),
+                            ("m x,z,y * * *", "3 times per day"),
+                            ("m x,y * * *", "2 times per day"),
+                            ("m h * * *", "every day"),
+                            ("m h */2 * *", "every 2 days"),
+                            ("m h */3 * *", "every 3 days"),
+                            ("m h * * d", "selected days"),
+                        ],
+                        default="m h * * *",
+                        help_text="Select how often a good"
+                                  "habit should be performed."
+                                  "NOTE! A good habit should be"
+                                  "performed once a week at least."
+                                  "For good habits only!",
+                        null=True,
+                        verbose_name="frequency",
+                    ),
+                ),
+                (
+                    "reward",
+                    models.CharField(
+                        blank=True,
+                        help_text="Enter the reward"
+                                  "for habit performance.",
+                        max_length=200,
+                        null=True,
+                        verbose_name="reward",
+                    ),
+                ),
+                (
+                    "end_time",
+                    models.DateTimeField(
+                        blank=True,
+                        help_text="Enter the time when a"
+                                  "habit should be performed"
+                                  "for the last time per day."
+                                  "Only for good habits that"
+                                  "should be performed several"
+                                  "times per day!",
+                        null=True,
+                        verbose_name="end time",
+                    ),
+                ),
+                (
+                    "time_needed",
+                    models.PositiveIntegerField(
+                        help_text="Enter time needed to"
+                                  "perform a habit in secs."
+                                  "Not more than 2 mins (120 sec).",
+                        verbose_name="time needed",
+                    ),
+                ),
+                (
+                    "is_public",
+                    models.BooleanField(
+                        help_text="Select whether you"
+                                  "want other users see"
+                                  "your habit.",
+                        verbose_name="public or not",
+                    ),
+                ),
+                (
+                    "related_habit",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="Select a related pleasant"
+                                  "habit (as a reward)."
+                                  "For good habits only!",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="habits.habit",
+                        verbose_name="related habit",
+                    ),
+                ),
+            ],
+        ),
+    ]
